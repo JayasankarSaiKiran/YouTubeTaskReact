@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .posts {
+        border: 1px solid red;
+        margin: 2px;
+        width: 15%;
+        height: 200px;
+        padding: 10px;
+        float: left;
+    }
+</style>
+
+<body>
+    <button type="button" onclick="Getdata()">
+        GetDataPosts
+    </button>
+    <div id="posts"></div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>userId</td>
+                <td>id</td>
+                <td>title</td>
+                <td>body</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        function Getdata() {
+            var getData = new XMLHttpRequest();
+
+            getData.onreadystatechange = function () {
+                if (getData.readyState == 4 && getData.status == 200) {
+                    console.log(getData.response)
+                    let allposts = JSON.parse(getData.response)
+                    displayusers(allposts)
+                }
+            }
+            getData.open("GET", "https://jsonplaceholder.typicode.com/posts")
+            getData.send()
+        }
+
+        function displayusers(posts) {
+            document.querySelector("tbody").innerHTML = ""
+            posts.forEach((info, i) => {
+                var myTr = document.createElement("tr")
+                for (a in info) {
+                    var myTd = document.createElement("td")
+                    myTd.innerHTML = info[a]
+                    myTr.appendChild(myTd)
+                }
+
+                //editbtd
+
+                var edittd=document.createElement("td")
+                var editbtn=document.createElement("button")
+                editbtn.setAttribute("onclick" , "EditUser")
+                editbtn.innerHTML="Edit"
+                edittd.appendChild(editbtn)
+                myTr.appendChild(edittd)
+
+                //Delete
+
+                var deletetd=document.createElement("td")
+                var deletebtn=document.createElement("button")
+                deletebtn.setAttribute("onclick","DeleteUser")
+                deletebtn.innerHTML="Delete"
+                deletetd.appendChild(deletebtn)
+                myTr.appendChild(deletetd)
+
+                document.querySelector("tbody").appendChild(myTr)
+            })
+        }
+    </script>
+</body>
+
+</html>

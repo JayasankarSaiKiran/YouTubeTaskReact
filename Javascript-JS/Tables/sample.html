@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Phone</td>
+                <td>City</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+         var Persons=[
+            {
+                id:1,
+                name:"Saikiran",
+                phone:6301400247,
+                city:"chittoor"
+            },
+            {
+                id:2,
+                name:"Akhil",
+                phone:6301400247,
+                city:"Chennai"
+            },
+            {
+                id:1,
+                name:"Vijay",
+                phone:6301400247,
+                city:"thirupati"
+            },
+         ]
+
+         function Getdata(Persons){
+            Persons.forEach((users)=>{
+                var myTr=document.createElement("tr")
+                for(a in users){
+                    var myTd=document.createElement("td")
+                    myTd.innerHTML=users[a]
+                    myTr.appendChild(myTd)
+                }     
+                document.querySelector('tbody').appendChild(myTr)           
+            })
+         }
+         Getdata(Persons)
+    </script>
+</body>
+</html>
